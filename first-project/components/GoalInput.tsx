@@ -1,35 +1,56 @@
 import React, { useState } from 'react'
-import { View, TextInput, Button, StyleSheet } from 'react-native'
+import PropTypes from 'prop-types'
+import { View, TextInput, Button, StyleSheet, Modal } from 'react-native'
 
 interface GoalInputT {
-    handleSubmit: (goal: string) => void
+    handleSubmit: (goal: string) => void,
+    handleCancel: () => void,
+    visible: boolean
 } 
 
-export const GoalInput: React.FC<GoalInputT> = ({handleSubmit}): JSX.Element => {
+export const GoalInput: React.FC<GoalInputT> = ({handleSubmit, visible, handleCancel}): JSX.Element => {
     const [enteredGoal, setEnteredGoal] = useState('')
-
     const handleInput = (enteredText: string): void => setEnteredGoal(enteredText)
     const goalSubmitted = () => {
         handleSubmit(enteredGoal)
         setEnteredGoal('')
     }
     return (
-        <View style={styles.container}>
-            <TextInput placeholder="Enter Goals" style={styles.input} value={enteredGoal} onChangeText={handleInput}/>
-            <Button onPress={goalSubmitted} title="ADD" />
-        </View>
+        <Modal visible={visible} animationType="slide">
+            <View style={styles.container}>
+                <TextInput placeholder="Enter Goals" style={styles.input} value={enteredGoal} onChangeText={handleInput}/>
+                <View style={styles.buttonContainer}>
+                    <Button onPress={goalSubmitted} title="ADD" />
+                    <Button onPress={handleCancel} title="Cancel" color="red" />
+                </View>
+                
+            </View>
+        </Modal> 
     )
 }
 
 const styles = StyleSheet.create({
     container: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center'
+        justifyContent: 'center',
+        flex: 1,
+        margin: 20,
+        alignItems: 'center',
     },    
     input: {
         width: 200,
         borderColor: 'black',
-        borderWidth: 1
-      }
+        borderWidth: 1,
+        marginBottom: 10
+    },
+    buttonContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-between'
+    }
+        
 })
+
+GoalInput.propTypes = {
+    handleSubmit: PropTypes.func.isRequired,
+    visible: PropTypes.bool.isRequired,
+    handleCancel: PropTypes.func.isRequired
+}

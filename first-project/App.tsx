@@ -1,19 +1,24 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, TextInput, Button, FlatList } from 'react-native';
+import { StyleSheet, View, Button, FlatList } from 'react-native';
 import { GoalItem } from './components/GoalItem';
 import { GoalInput } from './components/GoalInput'
 export default function App() {
   const [allGoals, setAllGoals] = useState<{key: string, value: string}[]>([])
+  const [isAddMode, setIsAddMode] = useState(false)
 
-
-  const handleSubmit = (goal: string): void => setAllGoals(currentGoals => [...currentGoals, {value: goal, key: Math.random().toString()}]) 
+  const handleSubmit = (goal: string): void => {
+    setAllGoals(currentGoals => [...currentGoals, {value: goal, key: Math.random().toString()}])
+    setIsAddMode(false)
+  } 
   
   const removeGoalHandler = (id: string): void => {
     setAllGoals(currentGoals => currentGoals.filter(goal => goal.key !== id))
   }
   return (
     <View style={styles.screen}>
-      <GoalInput handleSubmit={handleSubmit} />
+      <GoalInput visible={isAddMode} handleSubmit={handleSubmit} handleCancel={() => setIsAddMode(false)}/>
+      <Button title="Add new Goal" onPress={()=> setIsAddMode(true)} />
+      
       <FlatList 
         data={allGoals} 
         renderItem={itemData => 
@@ -28,12 +33,4 @@ const styles = StyleSheet.create({
   screen: {
     padding: 30
   },
-
-  listItem: {
-    padding: 10,
-    margin: 10,
-    backgroundColor: '#ccc',
-    borderCOlor: 'black',
-    borderWidth: 1
-  }
 });
