@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
         padding: 10,
         margin: 10,
         backgroundColor: '#ccc',
-        borderCOlor: 'black',
+        borderColor: 'black',
         borderWidth: 1
       }
 })
