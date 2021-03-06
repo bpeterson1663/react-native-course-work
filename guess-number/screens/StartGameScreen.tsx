@@ -1,12 +1,21 @@
 import React from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import PropTypes from 'prop-types'
+import { View, Text, StyleSheet, Button } from 'react-native'
 
-export const StartGameScreen: React.FC = (): JSX.Element => {
+interface StartGameScreenT {
+    startGame: () => void
+}
+export const StartGameScreen: React.FC<StartGameScreenT> = ({startGame}): JSX.Element => {
     return (
         <View style={styles.screen}>
             <Text>Game Screen</Text>
+            <Button onPress={startGame} title="Start Game"></Button>
         </View>
     )
+}
+
+StartGameScreen.propTypes = {
+    startGame: PropTypes.func.isRequired
 }
 
 const styles = StyleSheet.create({
