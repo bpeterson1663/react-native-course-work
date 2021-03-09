@@ -5,7 +5,7 @@ import { View, Text, StyleSheet, Button } from 'react-native'
 interface StartGameScreenT {
     startGame: () => void
 }
-export const StartGameScreen: React.FC<StartGameScreenT> = ({startGame}): JSX.Element => {
+export const StartGameScreen: React.FC<StartGameScreenT> = ({ startGame }): JSX.Element => {
     return (
         <View style={styles.screen}>
             <Text>Game Screen</Text>

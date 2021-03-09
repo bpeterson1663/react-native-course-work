@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { View, Text, StyleSheet } from 'react-native'
 
-export const Header: React.FC<{title: string}> = ({title}): JSX.Element => {
+export const Header: React.FC<{ title: string }> = ({ title }): JSX.Element => {
     return (
         <View style={styles.header}>
             <Text style={styles.headerTitle}>{title}</Text>

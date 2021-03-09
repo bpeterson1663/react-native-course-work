@@ -5,7 +5,7 @@ import { View, Text, StyleSheet } from 'react-native'
 export const InPlayScreen: React.FC = (): JSX.Element => {
     return (
         <View style={styles.screen}>
-            <Text>Guess A Number</Text>    
+            <Text>Guess A Number</Text>
         </View>
     )
 }
