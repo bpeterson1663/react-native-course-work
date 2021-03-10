@@ -21,7 +21,7 @@ export const StartGameScreen: React.FC<StartGameScreenT> = ({ startGame }): JSX.
     
     const resetInputHandler = (): void => {
         setEnteredValue('')
-        setConfirmedState(true)
+        setConfirmedState(false)
         Keyboard.dismiss()
     }
 
