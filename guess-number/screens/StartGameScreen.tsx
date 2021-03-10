@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { View, Text, StyleSheet, Button, TextInput } from 'react-native'
 import { Card } from '../components/Card'
+import Colors from '../constants/colors'
 interface StartGameScreenT {
     startGame: () => void
 }
@@ -13,8 +14,8 @@ export const StartGameScreen: React.FC<StartGameScreenT> = ({ startGame }): JSX.
                 <Text>Select a Number</Text>
                 <TextInput />
                 <View style={styles.buttonContainer}>
-                    <Button onPress={startGame} title="Reset"></Button>
-                    <Button onPress={startGame} title="Confirm"></Button>
+                    <View style={styles.button}><Button onPress={startGame} title="Reset" color={Colors.secondary}></Button></View>
+                    <View style={styles.button}><Button onPress={startGame} title="Confirm" color={Colors.primary}></Button></View>
                 </View>
             </Card>
             
@@ -46,5 +47,8 @@ const styles = StyleSheet.create({
         width: '100%',
         justifyContent: 'space-between',
         paddingHorizontal: 15
+    },
+    button: {
+        width: 100
     }
 })
