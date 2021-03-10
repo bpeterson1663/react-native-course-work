@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { View, Text, StyleSheet, Button, TextInput } from 'react-native'
-
+import { Card } from '../components/Card'
 interface StartGameScreenT {
     startGame: () => void
 }
@@ -9,14 +9,14 @@ export const StartGameScreen: React.FC<StartGameScreenT> = ({ startGame }): JSX.
     return (
         <View style={styles.screen}>
             <Text style={styles.title}>Start a new Game!</Text>
-            <View style={styles.inputContainer}>
+            <Card style={styles.inputContainer}>
                 <Text>Select a Number</Text>
                 <TextInput />
                 <View style={styles.buttonContainer}>
                     <Button onPress={startGame} title="Reset"></Button>
                     <Button onPress={startGame} title="Confirm"></Button>
                 </View>
-            </View>
+            </Card>
             
         </View>
     )
@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
     inputContainer: {
         width: 300,
         maxWidth: '80%',
-        alignItems: 'center'
+        alignItems: 'center',
     },
     buttonContainer: {
         flexDirection: 'row',
