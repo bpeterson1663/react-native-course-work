@@ -1,11 +1,11 @@
-import React, { ReactChildren } from 'react'
+import React from 'react'
 import { View, StyleSheet } from 'react-native'
 
 interface CardT {
     style: {}
 }
-export const Card: React.FC<CardT> = (props) => {
-    return <View style={{...styles.card, ...props.style}}>{props.children}</View>
+export const Card: React.FC<CardT> = ({style, children}) => {
+    return <View style={{...styles.card, ...style}}>{children}</View>
 }
 
 const styles = StyleSheet.create({
