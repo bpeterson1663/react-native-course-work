@@ -6,9 +6,9 @@ import { Input } from '../components/Input'
 import { NumberContainer } from '../components/NumberContainer'
 import Colors from '../constants/colors'
 interface StartGameScreenT {
-    startGame: () => void
+    onStartGame: (num: number) => void
 }
-export const StartGameScreen: React.FC<StartGameScreenT> = ({ startGame }): JSX.Element => {
+export const StartGameScreen: React.FC<StartGameScreenT> = ({onStartGame}): JSX.Element => {
     const [enteredValue, setEnteredValue] = useState('')
     const [confirmed, setConfirmedState] = useState(false)
     const [selectedNumber, setSelectedNumber] = useState(0)
@@ -16,7 +16,6 @@ export const StartGameScreen: React.FC<StartGameScreenT> = ({ startGame }): JSX.
         if(inputText){
             setEnteredValue(inputText.replace(/[^0-9]/g, ''))
         }
-        
     }
     
     const resetInputHandler = (): void => {
@@ -43,7 +42,7 @@ export const StartGameScreen: React.FC<StartGameScreenT> = ({ startGame }): JSX.
             <Card style={styles.summaryContainer}>
                 <Text>You Selected</Text>
                 <NumberContainer>{selectedNumber}</NumberContainer>
-                <Button onPress={() => {}} title="START GAME"></Button>
+                <Button onPress={() => onStartGame(selectedNumber)} title="START GAME"></Button>
             </Card>
         )
     }
@@ -66,7 +65,7 @@ export const StartGameScreen: React.FC<StartGameScreenT> = ({ startGame }): JSX.
 }
 
 StartGameScreen.propTypes = {
-    startGame: PropTypes.func.isRequired
+    onStartGame: PropTypes.func.isRequired
 }
 
 const styles = StyleSheet.create({
