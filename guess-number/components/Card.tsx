@@ -2,7 +2,7 @@ import React from 'react'
 import { View, StyleSheet } from 'react-native'
 
 interface CardT {
-    style: {}
+    style?: {}
 }
 export const Card: React.FC<CardT> = ({style, children}) => {
     return <View style={{...styles.card, ...style}}>{children}</View>
