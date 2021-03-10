@@ -1,4 +1,4 @@
-import React, {useState, useRef} from 'react'
+import React, {useState, useRef, useEffect} from 'react'
 import PropTypes from 'prop-types'
 import { View, Text, StyleSheet, Button, Alert } from 'react-native'
 import { NumberContainer } from '../components/NumberContainer'
@@ -15,12 +15,22 @@ const generateRandomBetween = (min: number, max: number, exclude: number): numbe
     }
 }
 interface GameScreenT {
-    userChoice: number
+    userChoice: number,
+    onGameOver: (num: number) => void
 }
-export const GameScreen: React.FC<GameScreenT> = ({userChoice}): JSX.Element => {
+export const GameScreen: React.FC<GameScreenT> = ({userChoice, onGameOver}): JSX.Element => {
     const [ currentGuess, setCurrentGuess] = useState(generateRandomBetween(1, 100, userChoice))
+    const [rounds, setRounds] = useState(0)
     const currentLow = useRef(1)
     const currentHigh = useRef(100)
+
+    
+    useEffect(() => {
+        if (currentGuess === userChoice){
+            onGameOver(rounds)
+        }
+    }, [currentGuess, userChoice, onGameOver])
+    
     const nextGuessHandler = (direction: 'lower' | 'greater') => {
         if( (direction === 'lower' && currentGuess < userChoice) || 
             (direction === 'greater' && currentGuess > userChoice)) {
@@ -34,6 +44,7 @@ export const GameScreen: React.FC<GameScreenT> = ({userChoice}): JSX.Element => 
         }
         const nextNumber = generateRandomBetween(currentLow.current, currentHigh.current, currentGuess)
         setCurrentGuess(nextNumber)
+        setRounds(curRounds => ++curRounds)
 
     }
     return (
