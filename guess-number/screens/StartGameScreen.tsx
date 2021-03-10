@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { View, Text, StyleSheet, Button, TouchableWithoutFeedback, Keyboard, Alert } from 'react-native'
 import { Card } from '../components/Card'
 import { Input } from '../components/Input'
+import { NumberContainer } from '../components/NumberContainer'
 import Colors from '../constants/colors'
 interface StartGameScreenT {
     startGame: () => void
@@ -21,6 +22,7 @@ export const StartGameScreen: React.FC<StartGameScreenT> = ({ startGame }): JSX.
     const resetInputHandler = (): void => {
         setEnteredValue('')
         setConfirmedState(true)
+        Keyboard.dismiss()
     }
 
     const confirmInputHandler = (): void => {
@@ -32,11 +34,18 @@ export const StartGameScreen: React.FC<StartGameScreenT> = ({ startGame }): JSX.
         setConfirmedState(true)
         setSelectedNumber(parseInt(enteredValue))
         setEnteredValue('')
+        Keyboard.dismiss()
     }
 
     let confirmedOutput: JSX.Element | null = null
     if(confirmed){
-        confirmedOutput = <Text>Chosen Number: {selectedNumber}</Text>
+        confirmedOutput = (
+            <Card style={styles.summaryContainer}>
+                <Text>You Selected</Text>
+                <NumberContainer>{selectedNumber}</NumberContainer>
+                <Button onPress={() => {}} title="START GAME"></Button>
+            </Card>
+        )
     }
     return (
         <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
@@ -87,5 +96,9 @@ const styles = StyleSheet.create({
     input: {
         width: 50,
         textAlign: 'center'
+    },
+    summaryContainer: {
+        marginTop: 20,
+        alignItems: 'center'
     }
 })
