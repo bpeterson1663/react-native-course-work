@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text, StyleSheet, Button } from 'react-native'
+import { View, Text, StyleSheet, Button, Image } from 'react-native'
 
 interface GameOverScreenT {
     numRounds: number,
@@ -10,6 +10,9 @@ export const GameOverScreen: React.FC<GameOverScreenT> = ({numRounds, userNumber
     return (
         <View style={styles.screen}>
             <Text>The Game is over</Text>
+            <View style={styles.imageContainer}>
+                <Image style={styles.image}  source={require('../assets/success.png')}/>
+            </View>
             <Text>Number of rounds: {numRounds}</Text>
             <Text>Number was: {userNumber}</Text>
             <Button onPress={restartGame} title="NEW GAME"></Button>
@@ -22,5 +25,18 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center'
+    },
+    imageContainer: {
+        width: 300,
+        height: 300,
+        borderRadius: 150,
+        borderWidth: 3,
+        borderColor: 'black',
+        overflow: 'hidden',
+        marginVertical: 30
+    }, 
+    image: {
+        width: '100%',
+        height: '100%',
     }
 })
