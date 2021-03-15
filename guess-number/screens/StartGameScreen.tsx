@@ -5,6 +5,8 @@ import { Card } from '../components/Card'
 import { Input } from '../components/Input'
 import { NumberContainer } from '../components/NumberContainer'
 import Colors from '../constants/colors'
+
+import {MainButton} from '../components/MainButton'
 interface StartGameScreenT {
     onStartGame: (num: number) => void
 }
@@ -42,7 +44,7 @@ export const StartGameScreen: React.FC<StartGameScreenT> = ({onStartGame}): JSX.
             <Card style={styles.summaryContainer}>
                 <Text>You Selected</Text>
                 <NumberContainer>{selectedNumber}</NumberContainer>
-                <Button onPress={() => onStartGame(selectedNumber)} title="START GAME"></Button>
+                <MainButton onPressHandler={() => onStartGame(selectedNumber)}>START GAME</MainButton>
             </Card>
         )
     }

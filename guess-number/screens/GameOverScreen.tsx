@@ -1,6 +1,6 @@
 import React from 'react'
-import { View, Text, StyleSheet, Button, Image } from 'react-native'
-
+import { View, Text, StyleSheet, Image } from 'react-native'
+import { MainButton } from '../components/MainButton'
 interface GameOverScreenT {
     numRounds: number,
     userNumber: number,
@@ -15,7 +15,7 @@ export const GameOverScreen: React.FC<GameOverScreenT> = ({numRounds, userNumber
             </View>
             <Text>Number of rounds: {numRounds}</Text>
             <Text>Number was: {userNumber}</Text>
-            <Button onPress={restartGame} title="NEW GAME"></Button>
+            <MainButton onPressHandler={restartGame}>NEW GAME</MainButton>
         </View>
     )
 }
