@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { View, Text, StyleSheet, Button, TouchableWithoutFeedback, Keyboard, Alert, Dimensions, ScrollView, KeyboardAvoidingView } from 'react-native'
 import { Card } from '../components/Card'
@@ -14,12 +14,24 @@ export const StartGameScreen: React.FC<StartGameScreenT> = ({onStartGame}): JSX.
     const [enteredValue, setEnteredValue] = useState('')
     const [confirmed, setConfirmedState] = useState(false)
     const [selectedNumber, setSelectedNumber] = useState(0)
+    const [ buttonWidth, setButtonWidth ] = useState(Dimensions.get('window').width / 4)
+
+    
     const numberInputHandler = (inputText: string): void => {
         if(inputText){
             setEnteredValue(inputText.replace(/[^0-9]/g, ''))
         }
     }
+    useEffect(() => {
+        const updateLayout = () => {
+            setButtonWidth(Dimensions.get('window').width / 4)
+        }
     
+        Dimensions.addEventListener('change', updateLayout)
+        return () => {
+            Dimensions.removeEventListener('change', updateLayout)
+        }
+    })
     const resetInputHandler = (): void => {
         setEnteredValue('')
         setConfirmedState(false)
@@ -58,8 +70,8 @@ export const StartGameScreen: React.FC<StartGameScreenT> = ({onStartGame}): JSX.
                             <Text>Select a Number</Text>
                             <Input style={styles.input} onChangeText={numberInputHandler} value={enteredValue} blurOnSubmit autoCapitalize='none' autoCorrect={false} maxLength={2} keyboardType='number-pad' />
                             <View style={styles.buttonContainer}>
-                                <View style={styles.button}><Button onPress={resetInputHandler} title="Reset" color={Colors.secondary}></Button></View>
-                                <View style={styles.button}><Button onPress={confirmInputHandler} title="Confirm" color={Colors.primary}></Button></View>
+                                <View style={{width: buttonWidth}}><Button onPress={resetInputHandler} title="Reset" color={Colors.secondary}></Button></View>
+                                <View style={{width: buttonWidth}}><Button onPress={confirmInputHandler} title="Confirm" color={Colors.primary}></Button></View>
                             </View>
                         </Card>
                         {confirmedOutput}
