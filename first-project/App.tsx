@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Button, FlatList } from 'react-native';
+import { StyleSheet, View, Button, FlatList, SafeAreaView } from 'react-native';
 import { GoalItem } from './components/GoalItem';
 import { GoalInput } from './components/GoalInput'
 export default function App() {
@@ -15,7 +15,7 @@ export default function App() {
     setAllGoals(currentGoals => currentGoals.filter(goal => goal.key !== id))
   }
   return (
-    <View style={styles.screen}>
+    <SafeAreaView style={styles.screen}>
       <GoalInput visible={isAddMode} handleSubmit={handleSubmit} handleCancel={() => setIsAddMode(false)}/>
       <Button title="Add new Goal" onPress={()=> setIsAddMode(true)} />
       
@@ -25,7 +25,7 @@ export default function App() {
           <GoalItem title={itemData.item.value} id={itemData.item.key} onDelete={removeGoalHandler}/>
         } 
         />  
-    </View>
+    </SafeAreaView>
   );
 }
 
